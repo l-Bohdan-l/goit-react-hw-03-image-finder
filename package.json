@@ -1,7 +1,7 @@
 {
-  "name": "goit-react-hw-03-phonebook",
+  "name": "goit-react-hw-03-image-finder",
   "version": "0.1.0",
-  "homepage": "https://l-bohdan-l.github.io/goit-react-hw-03-phonebook/",
+  "homepage": "https://l-bohdan-l.github.io/goit-react-hw-03-image-finder/",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.15.1",
@@ -26,13 +26,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/l-Bohdan-l/goit-react-hw-03-phonebook"
+    "url": "git+https://github.com/l-Bohdan-l/goit-react-hw-03-image-finder"
   },
   "keywords": [],
   "author": "Bohdan Papushoi",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/l-Bohdan-l/goit-react-hw-03-phonebook/issues"
+    "url": "https://github.com/l-Bohdan-l/goit-react-hw-03-image-finder/issues"
   },
   "eslintConfig": {
     "extends": [
