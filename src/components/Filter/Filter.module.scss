@@ -1,0 +1,23 @@
+.findLabel {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+}
+
+.findInput {
+  margin-top: 15px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  border: 2px solid transparent;
+  outline: none;
+  width: 90%;
+}
+
+.findInput:hover,
+.findInput:focus {
+  border: 2px solid #b1a5a5;
+  background-color: #dbe6fd;
+}
