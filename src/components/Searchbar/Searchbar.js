@@ -1,6 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Component } from 'react';
+import { ImSearch } from 'react-icons/im';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export class Searchbar extends Component {
   static propTypes = {
@@ -20,7 +23,12 @@ export class Searchbar extends Component {
   handleSubmit = e => {
     e.preventDefault();
     const { imgQuery } = this.state;
+    if (this.state.imgQuery.trim() === '') {
+      toast.error('Empty input value');
+      return;
+    }
     this.props.onSubmit(imgQuery);
+    this.setState({ imgQuery: '' });
   };
 
   // resetInput = e => {
@@ -32,7 +40,7 @@ export class Searchbar extends Component {
       <header class="searchbar">
         <form class="form" onSubmit={this.handleSubmit}>
           <button type="submit" class="button">
-            <span class="button-label">Search</span>
+            <ImSearch />
           </button>
 
           <input

@@ -3,6 +3,9 @@ import React from 'react';
 import { Component } from 'react';
 import { Searchbar } from './components/Searchbar/Searchbar';
 import { fetchImages } from './services/apiService';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { ImageGallery } from './components/ImageGallery/ImageGallery';
 
 class App extends Component {
   state = {
@@ -14,6 +17,10 @@ class App extends Component {
     openModal: false,
   };
 
+  handleSubmit = imgQuery => {
+    this.setState({ searchQuery: imgQuery });
+  };
+
   componentDidMount() {}
 
   componentDidUpdate(prevProps, prevState) {}
@@ -21,19 +28,9 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        {/* <header className="App-header">
-          <Container title="Phonebook">
-            <ContactForm onSubmit={this.createContact} />
-          </Container>
-          <Container title="Contacts">
-            <Filter value={filter} onChange={this.changeFilter} />
-            <ContactsList
-              contacts={filteredContacts}
-              onDelete={this.deleteContact}
-            ></ContactsList>
-          </Container>
-        </header> */}
-        <Searchbar />
+        <Searchbar onSubmit={this.handleSubmit} />
+        <ToastContainer />
+        <ImageGallery imgQuery={this.state.searchQuery} />
       </div>
     );
   }

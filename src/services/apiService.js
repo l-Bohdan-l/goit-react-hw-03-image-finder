@@ -1,3 +1,5 @@
+import { Component } from 'react';
+
 export const fetchImages = (imgQuery, page) => {
   const KEY = `24097500-b1b25815474c0bcb76303e859`;
   const baseUrl = `https://pixabay.com/api/?`;
