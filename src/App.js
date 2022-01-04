@@ -6,7 +6,7 @@ import { fetchImages } from './services/apiService';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { ImageGallery } from './components/ImageGallery/ImageGallery';
-import { Button } from './components/Button/Button';
+// import { Button } from './components/Button/Button';
 
 class App extends Component {
   state = {
@@ -26,14 +26,6 @@ class App extends Component {
 
   componentDidUpdate(prevProps, prevState) {}
 
-  nextPage = () => {
-    this.setState(({ page }) => {
-      return {
-        page: page + 1,
-      };
-    });
-  };
-
   render() {
     return (
       <div className="App">
@@ -43,7 +35,6 @@ class App extends Component {
           imgQuery={this.state.searchQuery}
           page={this.state.page}
         />
-        <Button onClick={this.nextPage} />
       </div>
     );
   }
