@@ -13,9 +13,6 @@ class App extends Component {
     modalContent: '',
     searchQuery: '',
     page: 1,
-    visibleImages: [],
-    isLoading: false,
-    openModal: false,
   };
 
   handleSubmit = imgQuery => {

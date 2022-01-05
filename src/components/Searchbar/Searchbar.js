@@ -4,6 +4,7 @@ import { Component } from 'react';
 import { ImSearch } from 'react-icons/im';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import styles from './Searchbar.module.scss';
 
 export class Searchbar extends Component {
   static propTypes = {
@@ -31,25 +32,20 @@ export class Searchbar extends Component {
     this.setState({ imgQuery: '' });
   };
 
-  // resetInput = e => {
-  //     this.setState({ name: '', number: '' });
-  // };
   render() {
     const { imgQuery } = this.state;
     return (
-      <header class="searchbar">
-        <form class="form" onSubmit={this.handleSubmit}>
-          <button type="submit" class="button">
+      <header className={styles.searchbar}>
+        <form className={styles.form} onSubmit={this.handleSubmit}>
+          <button type="submit" className={styles.button}>
             <ImSearch />
           </button>
 
           <input
             value={imgQuery}
             onChange={this.handleChange}
-            class="input"
+            className={styles.input}
             type="text"
-            autocomplete="off"
-            autofocus
             placeholder="Search images and photos"
           />
         </form>

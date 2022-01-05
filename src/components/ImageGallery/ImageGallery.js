@@ -2,6 +2,8 @@ import { Component } from 'react';
 import { ImageGalleryItem } from '../ImageGalleryItem/ImageGalleryItem';
 import { Button } from '../Button/Button';
 import Loader from 'react-loader-spinner';
+import { Modal } from '../Modal/Modal';
+import styles from './ImageGallery.module.scss';
 
 export class ImageGallery extends Component {
   state = {
@@ -9,7 +11,20 @@ export class ImageGallery extends Component {
     page: 1,
     imgArray: [],
     loading: false,
+    showModal: false,
+    largeUrl: '',
   };
+
+  // getLargeUrl = itemId => {
+  //   const { imgArray } = this.state;
+  //   const element = imgArray.find(({ id }) => id === itemId);
+  //   // this.setState({ largeUrl: element.largeImageURL });
+  //   console.log(element)
+  // };
+
+  // modalContent = id => {
+  //   this.props.onItemClick(id);
+  // };
 
   findImage = () => {
     const KEY = `24097500-b1b25815474c0bcb76303e859`;
@@ -63,17 +78,38 @@ export class ImageGallery extends Component {
     });
   };
 
+  toggleModal = e => {
+    this.setState(({ showModal }) => ({
+      showModal: !showModal,
+    }));
+  };
+
+  getLargeUrl = e => {
+    const image = this.state.imgArray.find(
+      img => img.webformatURL === e.target.src,
+    );
+    this.setState(({ largeUrl }) => ({
+      largeUrl: image.largeImageURL,
+    }));
+  };
+
   render() {
     return (
       <>
-        <ul>
-          {this.state.imgArray.map(imgItem => (
-            <li key={imgItem.id}>
-              <ImageGalleryItem
-                link={imgItem.previewURL}
-                name={this.props.imgQuery}
-              />
-            </li>
+        {this.state.showModal && (
+          <Modal onClose={this.toggleModal}>
+            <img src={this.state.largeUrl} alt={this.state.imgQuery} />
+          </Modal>
+        )}
+        <ul className={styles.ImageGallery}>
+          {this.state.imgArray.map(image => (
+            <ImageGalleryItem
+              key={image.id}
+              link={image.webformatURL}
+              name={this.props.imgQuery}
+              largeUrl={this.getLargeUrl}
+              openModal={this.toggleModal}
+            />
           ))}
         </ul>
         {this.state.loading && (

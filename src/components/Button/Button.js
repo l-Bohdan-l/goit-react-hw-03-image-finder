@@ -1,6 +1,8 @@
+import styles from './Button.module.scss';
+
 export const Button = ({ onClick }) => {
   return (
-    <button type="button" onClick={onClick}>
+    <button className={styles.button} type="button" onClick={onClick}>
       Load more
     </button>
   );
