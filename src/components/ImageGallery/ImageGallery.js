@@ -1,12 +1,14 @@
 import { Component } from 'react';
 import { ImageGalleryItem } from '../ImageGalleryItem/ImageGalleryItem';
 import { Button } from '../Button/Button';
+import Loader from 'react-loader-spinner';
 
 export class ImageGallery extends Component {
   state = {
     imgQuery: '',
     page: 1,
     imgArray: [],
+    loading: false,
   };
 
   findImage = () => {
@@ -27,11 +29,13 @@ export class ImageGallery extends Component {
           console.log('fetch.then', this.state);
           return { imgArray: [...prevState.imgArray, ...data.hits] };
         });
-      });
+      })
+      .finally(() => this.setState({ loading: false }));
   };
 
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.imgQuery !== this.props.imgQuery) {
+      this.setState({ loading: true });
       console.log('1 if props', prevProps.imgQuery);
       this.setState({ page: 1, imgArray: [] });
       console.log('1 if', this.state);
@@ -41,8 +45,11 @@ export class ImageGallery extends Component {
       prevProps.imgQuery !== this.props.imgQuery ||
       prevState.page !== this.state.page
     ) {
+      this.setState({ loading: true });
       console.log('2 if props', prevProps.imgQuery);
-      this.findImage();
+      setTimeout(() => {
+        this.findImage();
+      }, 1000);
       console.log('2 if', this.state);
       return;
     }
@@ -64,12 +71,15 @@ export class ImageGallery extends Component {
             <li key={imgItem.id}>
               <ImageGalleryItem
                 link={imgItem.previewURL}
-                name={this.state.imgQuery}
+                name={this.props.imgQuery}
               />
             </li>
           ))}
         </ul>
-        <Button onClick={this.nextPage} />
+        {this.state.loading && (
+          <Loader type="Rings" color="#00BFFF" height={80} width={80} />
+        )}
+        {this.state.imgArray.length !== 0 && <Button onClick={this.nextPage} />}
       </>
     );
   }
