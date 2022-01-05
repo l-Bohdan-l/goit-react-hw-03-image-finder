@@ -9,3 +9,9 @@ export const ImageGalleryItem = ({ link, openModal, name, largeUrl }) => {
     </li>
   );
 };
+
+ImageGalleryItem.propTypes = {
+  openModal: PropTypes.func.isRequired,
+  link: PropTypes.string,
+  name: PropTypes.string,
+};

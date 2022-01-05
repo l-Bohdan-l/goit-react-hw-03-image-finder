@@ -1,13 +1,9 @@
 import { Component } from 'react';
-import { createPortal } from 'react-dom';
 import styles from './Modal.module.scss';
-
-const modalRoot = document.querySelector('body');
 
 export class Modal extends Component {
   componentDidMount() {
     window.addEventListener('keydown', this.hendleKeyDown);
-    window.addEventListener('click', this.clickOnImg);
   }
   componentWillUnmount() {
     window.removeEventListener('keydown', this.hendleKeyDown);

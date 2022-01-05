@@ -9,6 +9,7 @@ import styles from './Searchbar.module.scss';
 export class Searchbar extends Component {
   static propTypes = {
     onSubmit: PropTypes.func.isRequired,
+    onChange: PropTypes.func.isRequired,
   };
 
   state = {
@@ -18,7 +19,6 @@ export class Searchbar extends Component {
   handleChange = event => {
     const { value } = event.currentTarget;
     this.setState({ imgQuery: value });
-    console.log(this.state);
   };
 
   handleSubmit = e => {

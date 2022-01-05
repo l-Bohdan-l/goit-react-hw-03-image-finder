@@ -2,11 +2,9 @@ import './App.scss';
 import React from 'react';
 import { Component } from 'react';
 import { Searchbar } from './components/Searchbar/Searchbar';
-import { fetchImages } from './services/apiService';
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { ImageGallery } from './components/ImageGallery/ImageGallery';
-// import { Button } from './components/Button/Button';
 
 class App extends Component {
   state = {

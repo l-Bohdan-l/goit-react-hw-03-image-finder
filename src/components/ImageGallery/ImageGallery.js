@@ -4,8 +4,15 @@ import { Button } from '../Button/Button';
 import Loader from 'react-loader-spinner';
 import { Modal } from '../Modal/Modal';
 import styles from './ImageGallery.module.scss';
+import PropTypes from 'prop-types';
 
 export class ImageGallery extends Component {
+  static propTypes = {
+    onClose: PropTypes.func,
+    onClick: PropTypes.func,
+    openModal: PropTypes.func,
+  };
+
   state = {
     imgQuery: '',
     page: 1,
@@ -14,17 +21,6 @@ export class ImageGallery extends Component {
     showModal: false,
     largeUrl: '',
   };
-
-  // getLargeUrl = itemId => {
-  //   const { imgArray } = this.state;
-  //   const element = imgArray.find(({ id }) => id === itemId);
-  //   // this.setState({ largeUrl: element.largeImageURL });
-  //   console.log(element)
-  // };
-
-  // modalContent = id => {
-  //   this.props.onItemClick(id);
-  // };
 
   findImage = () => {
     const KEY = `24097500-b1b25815474c0bcb76303e859`;
@@ -41,7 +37,6 @@ export class ImageGallery extends Component {
       })
       .then(data => {
         this.setState(prevState => {
-          console.log('fetch.then', this.state);
           return { imgArray: [...prevState.imgArray, ...data.hits] };
         });
       })
@@ -51,9 +46,7 @@ export class ImageGallery extends Component {
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.imgQuery !== this.props.imgQuery) {
       this.setState({ loading: true });
-      console.log('1 if props', prevProps.imgQuery);
       this.setState({ page: 1, imgArray: [] });
-      console.log('1 if', this.state);
     }
 
     if (
@@ -61,11 +54,10 @@ export class ImageGallery extends Component {
       prevState.page !== this.state.page
     ) {
       this.setState({ loading: true });
-      console.log('2 if props', prevProps.imgQuery);
       setTimeout(() => {
         this.findImage();
       }, 1000);
-      console.log('2 if', this.state);
+
       return;
     }
   }
@@ -78,7 +70,7 @@ export class ImageGallery extends Component {
     });
   };
 
-  toggleModal = e => {
+  toggleModal = () => {
     this.setState(({ showModal }) => ({
       showModal: !showModal,
     }));
