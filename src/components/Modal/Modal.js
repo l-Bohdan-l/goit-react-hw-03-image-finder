@@ -5,23 +5,23 @@ import styles from './Modal.module.scss';
 const modalRoot = document.querySelector('body');
 
 export class Modal extends Component {
-  //   componentDidMount() {
-  //       window.addEventListener('keydown', this.hendleKeyDown);
-  //       window.addEventListener('click', this.clickOnImg);
-  //   }
-  //   componentWillUnmount() {
-  //       window.removeEventListener('keydown', this.hendleKeyDown);
-  //     }
+  componentDidMount() {
+    window.addEventListener('keydown', this.hendleKeyDown);
+    window.addEventListener('click', this.clickOnImg);
+  }
+  componentWillUnmount() {
+    window.removeEventListener('keydown', this.hendleKeyDown);
+  }
 
-  //     clickOnImg = e => {
-  //        this.props.onClose();
-  //     }
+  clickOnImg = e => {
+    this.props.onClose();
+  };
 
-  //   hendleKeyDown = e => {
-  //     if (e.code === 'Escape') {
-  //       this.props.onClose();
-  //     }
-  //   };
+  hendleKeyDown = e => {
+    if (e.code === 'Escape') {
+      this.props.onClose();
+    }
+  };
 
   clickOnModal = e => {
     if (e.target === e.currentTarget) {
