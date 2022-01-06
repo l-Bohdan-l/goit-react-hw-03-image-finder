@@ -5,6 +5,7 @@ import Loader from 'react-loader-spinner';
 import { Modal } from '../Modal/Modal';
 import styles from './ImageGallery.module.scss';
 import PropTypes from 'prop-types';
+import { findImage } from '../../services/ApiSrvice';
 
 export class ImageGallery extends Component {
   static propTypes = {
@@ -22,27 +23,6 @@ export class ImageGallery extends Component {
     largeUrl: '',
   };
 
-  findImage = () => {
-    const KEY = `24097500-b1b25815474c0bcb76303e859`;
-    const baseUrl = `https://pixabay.com/api/?`;
-    const url =
-      baseUrl +
-      `key=${KEY}` +
-      `&q=${this.props.imgQuery}` +
-      `&page=${this.state.page}` +
-      `&image_type=photo&orientation=horizontal&per_page=12`;
-    fetch(url)
-      .then(result => {
-        return result.json();
-      })
-      .then(data => {
-        this.setState(prevState => {
-          return { imgArray: [...prevState.imgArray, ...data.hits] };
-        });
-      })
-      .finally(() => this.setState({ loading: false }));
-  };
-
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.imgQuery !== this.props.imgQuery) {
       this.setState({ loading: true });
@@ -55,9 +35,14 @@ export class ImageGallery extends Component {
     ) {
       this.setState({ loading: true });
       setTimeout(() => {
-        this.findImage();
+        findImage(this.props.imgQuery, this.state.page)
+          .then(data => {
+            this.setState(({ imgArray }) => {
+              return { imgArray: [...imgArray, ...data.hits] };
+            });
+          })
+          .finally(() => this.setState({ loading: false }));
       }, 1000);
-
       return;
     }
   }
@@ -84,6 +69,14 @@ export class ImageGallery extends Component {
       largeUrl: image.largeImageURL,
     }));
   };
+
+  // largeUrl =() => {this.getLargeUrl(image. largeImageURL)}
+
+  // getLargeUrl = largeUrl => {
+  // this.setState(({ largeUrl }) => ({
+  // largeUrl
+  // }));
+  // };
 
   render() {
     return (
