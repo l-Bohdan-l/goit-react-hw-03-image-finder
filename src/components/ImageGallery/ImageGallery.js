@@ -61,22 +61,11 @@ export class ImageGallery extends Component {
     }));
   };
 
-  getLargeUrl = e => {
-    const image = this.state.imgArray.find(
-      img => img.webformatURL === e.target.src,
-    );
+  getLargeUrl = largeImageURL => {
     this.setState(({ largeUrl }) => ({
-      largeUrl: image.largeImageURL,
+      largeUrl: largeImageURL,
     }));
   };
-
-  // largeUrl =() => {this.getLargeUrl(image. largeImageURL)}
-
-  // getLargeUrl = largeUrl => {
-  // this.setState(({ largeUrl }) => ({
-  // largeUrl
-  // }));
-  // };
 
   render() {
     return (
@@ -92,7 +81,7 @@ export class ImageGallery extends Component {
               key={image.id}
               link={image.webformatURL}
               name={this.props.imgQuery}
-              largeUrl={this.getLargeUrl}
+              largeUrl={() => this.getLargeUrl(image.largeImageURL)}
               openModal={this.toggleModal}
             />
           ))}
